@@ -25,7 +25,7 @@ def test_sftp_localhost_download(host):
 
 
 def test_sftp_localhost_upload(host):
-    host.run("mkdir /chroot/test01/upload \
+    host.run("mkdir -p /chroot/test01/upload && \
         chown test01:sftp /chroot/test01/upload")
     cmd = host.run("echo 'put /etc/shadow' |\
         sftp -P2020 test01@localhost:upload")

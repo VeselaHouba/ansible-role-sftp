@@ -1,7 +1,18 @@
 ---
 - name: Prepare
   hosts: all
-  tasks:
+  roles:
+    - role: veselahouba.sftp
+  vars:
+    sftp_users:
+      - name: test01
+        chroot_dir: /chroot/test01
+        ssh_key: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDJUjvrcNQ7VkktO5X3Sizsf3d82if2T4W6U0aDQZ3EGNSImyFQ3zcNRRybFpVVJG3Zt2wt3giS2Pj3m/kMd7loT3UX+3u4P7E841/fOkTdWzXzTFAKU1T8Zu+VwFKt2xCQR292stN0pRp2cndrajTjCpR1hg4tnR00hsCuBNJUut0xoZBhS5lXoXYEuokXyPAVil9+FNvvBFO/zb2UGWVqif4Wl+BJMNYBFERNWKQoujhj/kPmJ6ViW7ByRJm8TsgrXGqStXC6ft0r4tgAFsQhcYnxr4ScT+1PBkCAoraoX59X90GKCIUJFdEIUS8P7LEBRNE6cyg5v0zLdbZvAx8R test01"
+      - name: test02
+        chroot_dir: /chroot/test02
+        ssh_key: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDJUjvrcNQ7VkktO5X3Sizsf3d82if2T4W6U0aDQZ3EGNSImyFQ3zcNRRybFpVVJG3Zt2wt3giS2Pj3m/kMd7loT3UX+3u4P7E841/fOkTdWzXzTFAKU1T8Zu+VwFKt2xCQR292stN0pRp2cndrajTjCpR1hg4tnR00hsCuBNJUut0xoZBhS5lXoXYEuokXyPAVil9+FNvvBFO/zb2UGWVqif4Wl+BJMNYBFERNWKQoujhj/kPmJ6ViW7ByRJm8TsgrXGqStXC6ft0r4tgAFsQhcYnxr4ScT+1PBkCAoraoX59X90GKCIUJFdEIUS8P7LEBRNE6cyg5v0zLdbZvAx8R test02"
+
+  pre_tasks:
     - name: root ssh dir
       file:
         path: /root/.ssh/

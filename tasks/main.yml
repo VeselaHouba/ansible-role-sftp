@@ -7,12 +7,21 @@
   group:
     name: "{{ sftp_group }}"
 
+- name: Delete users
+  include_tasks: delete_user.yml
+  with_items: "{{ sftp_users }}"
+  loop_control:
+    loop_var: sftp_user
+    label: sftp_user.name
+  when: sftp_user.state | default('present') == 'absent'
+
 - name: Create users
   include_tasks: create_user.yml
   with_items: "{{ sftp_users }}"
   loop_control:
     loop_var: sftp_user
     label: sftp_user.name
+  when: sftp_user.state | default('present') == 'present'
 
 - name: Deploy extra sshd config
   template:

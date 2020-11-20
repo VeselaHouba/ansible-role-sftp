@@ -1,0 +1,10 @@
+---
+- name: Delete user {{ sftp_user.name }}
+  user:
+    name: "{{ sftp_user.name }}"
+    state: absent
+
+- name: Delete auth dir
+  file:
+    path: "{{ sftp_auth_files_dir }}/{{ sftp_user.name }}"
+    state: absent
