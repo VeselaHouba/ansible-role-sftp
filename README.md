@@ -35,13 +35,9 @@ sftp_users:
 All components of the **chroot_dir** must be root-owned directories that are not writable by any other user or any group at all.
 
 ## Requirements
-- Tested with molecule on Debian 8,9,10 and Ubuntu 14.04,16.04,18.04,20.04
-- Ansible 2.7.4
+- Tested with molecule on Debian 9,10, Ubuntu 18.04,20.04
+- Ansible 2.10
 
-## Start to play
-```
-service heplify start
-```
 
 ## Ansible Galaxy
 https://galaxy.ansible.com/veselahouba/sftp

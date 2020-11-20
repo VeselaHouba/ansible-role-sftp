@@ -8,5 +8,5 @@ docker \
   -w "/tmp/veselahouba.sftp" \
   -e MOLECULE_DISTRO \
   -e MOLECULE_NO_LOG=false \
-  veselahouba/molecule:v3 \
+  veselahouba/molecule:latest \
   molecule "${@}"
