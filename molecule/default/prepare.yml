@@ -2,6 +2,11 @@
 - name: Prepare
   hosts: all
   tasks:
+    - name: update cache
+      apt:
+        update_cache: true
+      when: ansible_os_family == 'Debian'
+
     - name: root ssh dir
       file:
         path: /root/.ssh/
