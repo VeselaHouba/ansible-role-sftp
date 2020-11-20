@@ -1,0 +1,22 @@
+# {{ ansible_managed }}
+Port {{ sftp_port }}
+ChallengeResponseAuthentication no
+PasswordAuthentication no
+PermitRootLogin no
+# UsePAM no
+X11Forwarding no
+AllowTcpForwarding no
+PrintMotd no
+AcceptEnv LANG LC_*
+Subsystem	sftp internal-sftp
+
+{% for sftp_user in sftp_users %}
+AuthorizedKeysFile "{{ sftp_auth_files_dir }}/%u/authorized_keys"
+Match User {{ sftp_user.name }}
+  ChrootDirectory {{ sftp_user.chroot_dir }}
+  ForceCommand internal-sftp
+{% endfor %}
+
+# TODO
+# usermod -p '*' abcd
+# chroot path /home/<user> needs to be root owned

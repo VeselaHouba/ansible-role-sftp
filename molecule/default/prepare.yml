@@ -1,0 +1,51 @@
+---
+- name: Prepare
+  hosts: all
+  tasks:
+    - name: root ssh dir
+      file:
+        path: /root/.ssh/
+        owner: root
+        group: root
+        mode: 0755
+        state: directory
+
+    - name: Add ssh config
+      copy:
+        dest: /root/.ssh/config
+        content: StrictHostKeyChecking no
+
+    - name: Upload key for testinfra
+      copy:
+        dest: /root/.ssh/id_rsa
+        owner: root
+        group: root
+        mode: 0600
+        content: |
+          -----BEGIN OPENSSH PRIVATE KEY-----
+          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
+          -----END OPENSSH PRIVATE KEY-----

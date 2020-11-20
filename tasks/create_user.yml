@@ -1,0 +1,27 @@
+---
+- name: Create user {{ sftp_user.name }}
+  user:
+    name: "{{ sftp_user.name }}"
+    group: "{{ sftp_group }}"
+    shell: /usr/sbin/nologin
+    createhome: false
+    password: '*'
+
+- name: Create needed dirs
+  file:
+    path: "{{ item }}"
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+  with_items:
+    - "{{ sftp_auth_files_dir }}/{{ sftp_user.name }}"
+    - "{{ sftp_user.chroot_dir }}"
+
+- name: Add ssh keys
+  authorized_key:
+    path: "{{ sftp_auth_files_dir }}/{{ sftp_user.name }}/authorized_keys"
+    user: "{{ sftp_user.name }}"
+    key: "{{ sftp_user.ssh_key }}"
+    manage_dir: false
+    exclusive: true

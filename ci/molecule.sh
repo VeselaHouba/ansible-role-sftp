@@ -1,18 +1,12 @@
 #!/usr/bin/env bash
-if [ "${MOLECULE_INSTANCE_IMAGE}" == "" ]; then
-  echo "Variable MOLECULE_INSTANCE_IMAGE has to be set"
-  echo "Example values:"
-  grep -v ^\# "$(dirname "${0}")/os_versions.txt"
-  exit 1
-fi
 docker \
   run \
   --rm \
   -it \
-  -v "$(pwd):/tmp/$(basename "${PWD}")" \
+  -v "$(pwd):/tmp/veselahouba.sftp" \
   -v /var/run/docker.sock:/var/run/docker.sock \
-  -w "/tmp/$(basename "${PWD}")" \
-  -e MOLECULE_INSTANCE_IMAGE \
+  -w "/tmp/veselahouba.sftp" \
+  -e MOLECULE_DISTRO \
   -e MOLECULE_NO_LOG=false \
   veselahouba/molecule:v3 \
   molecule "${@}"

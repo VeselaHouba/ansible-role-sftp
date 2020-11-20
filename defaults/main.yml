@@ -1,1 +1,14 @@
 ---
+sftp_sshd_config_file: /etc/ssh/sshd_sftp_config
+sftp_port: "2020"
+sftp_service_name: sshd_sftp
+sftp_auth_files_dir: /etc/ssh/auth_files
+sftp_group: sftp
+sftp_users: []
+# example structure
+# sftp_users:
+#   - name: test01
+#     chroot_dir: /chroot/tes01
+#     ssh_key: |
+#       ssh-rsa blablabla comment1
+#       ssh-rsa blablabla comment2
