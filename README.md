@@ -1,6 +1,6 @@
 # Ansible Role: sFTP
 
-[![Build Status](https://travis-ci.org/VeselaHouba/ansible-role-sftp.svg?branch=master)](https://travis-ci.org/VeselaHouba/ansible-role-sftp)
+![CI](https://github.com/VeselaHouba/ansible-role-sftp/workflows/CI/badge.svg)
 
 Ansible role for sftp.
 
