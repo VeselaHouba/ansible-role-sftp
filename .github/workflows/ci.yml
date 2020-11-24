@@ -36,6 +36,7 @@ jobs:
           ansible-lint
 
   molecule:
+    needs: lint
     name: Molecule
     runs-on: ubuntu-latest
     strategy:
