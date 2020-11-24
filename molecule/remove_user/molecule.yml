@@ -15,8 +15,4 @@ provisioner:
   name: ansible
 verifier:
   name: testinfra
-lint: |
-  set -e
-  yamllint .
-  ansible-lint
-  flake8
+lint: flake8

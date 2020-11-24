@@ -5,6 +5,5 @@ rules:
   line-length:
     max: 500
     level: warning
-
-ignore: |
-  .travis.yml
+  truthy:
+    check-keys: false
