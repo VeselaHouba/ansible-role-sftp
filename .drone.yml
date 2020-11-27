@@ -1,0 +1,54 @@
+---
+kind: pipeline
+name: molecule
+workspace:
+  path: veselahouba.sftp
+
+environment:
+  DISTROS: ubuntu1804 ubuntu2004 debian9 debian10
+
+services:
+  - name: docker
+    image: docker:dind
+    privileged: true
+    volumes:
+      - name: dockersock
+        path: /var/run
+
+volumes:
+  - name: dockersock
+    temp: {}
+
+steps:
+  - name: Lint
+    image: veselahouba/molecule
+    commands:
+      - shellcheck_wrapper
+      - flake8
+      - yamllint .
+      - ansible-lint
+
+  - name: Molecule test
+    image: veselahouba/molecule
+    volumes:
+      - name: dockersock
+        path: /var/run
+    commands:
+      - sleep 5  # give docker enough time to start
+      - docker ps -a
+      - ansible --version
+      - molecule --version
+      - |
+        for MOLECULE_DISTRO in $${DISTROS}; do
+          export MOLECULE_DISTRO
+          molecule test --all
+        done
+
+# ---
+# kind: pipeline
+# name: release
+# workspace:
+#   path: veselahouba.sftp
+# when:
+#   event:
+#     - tag
